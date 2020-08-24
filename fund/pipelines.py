@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
-from pymongo import MongoClient
+import motor.motor_asyncio
 
 
 class MongoDBPipeline(object):
-    def __init__(self, mongodb_uri, mongodb_db):
-        self.mongodb_uri = mongodb_uri
-        self.mongodb_db = mongodb_db
-        self.client = None
-        self.db = None
+    def __init__(self, client, mongodb_db):
+        self.client = client
+        self.db = self.client[mongodb_db]
 
     @classmethod
-    def from_crawler(cls, crawler):
-        return cls(
-            mongodb_uri=crawler.settings.get("MONGODB_URI", "mongodb://localhost:27017"),
-            mongodb_db=crawler.settings.get("MONGODB_DATABASE", "crawler"),
-        )
-
-    def open_spider(self, spider):
-        self.client = MongoClient(self.mongodb_uri)
-        self.db = self.client[self.mongodb_db]
+    def from_settings(cls, settings):
+        mongodb_uri = settings["MONGODB_URI"]
+        client = motor.motor_asyncio.AsyncIOMotorClient(mongodb_uri)
+        mongodb_db = settings["MONGODB_DATABASE"]
+        return cls(client, mongodb_db)
 
     def close_spider(self, spider):
         self.client.close()

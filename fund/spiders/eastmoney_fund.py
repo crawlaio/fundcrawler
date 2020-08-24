@@ -17,7 +17,7 @@ class EastmoneyFundSpider(scrapy.Spider):
             url=fund_list_url, dont_filter=True, callback=self.parse,
         )
 
-    def parse(self, response):
+    def parse(self, response,**kwargs):
         js_content = execjs.compile(response.text)
         name = js_content.eval("r")
         for one in name:

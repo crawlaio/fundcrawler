@@ -3,3 +3,5 @@ pymongo
 scrapy_redis
 redis
 matplotlib
+loguru
+motor

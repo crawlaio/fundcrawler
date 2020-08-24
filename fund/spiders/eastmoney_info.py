@@ -17,7 +17,7 @@ class EastmoneyInfoSpider(RedisSpider):
         fund_info_url = f"http://fund.eastmoney.com/pingzhongdata/{code}.js"
         return scrapy.Request(url=fund_info_url, dont_filter=True, meta={"code": code}, callback=self.parse, )
 
-    def parse(self, response):
+    def parse(self, response, **kwargs):
         code = response.meta.get("code")
         js_content = execjs.compile(response.text)
         date_map = {

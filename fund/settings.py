@@ -79,9 +79,9 @@ DUPEFILTER_DEBUG = False
 
 # ---------------------------------------CONCURRENT setting-----------------------------------
 
-CONCURRENT_ITEMS = 100
-CONCURRENT_REQUESTS = 16
-CONCURRENT_REQUESTS_PER_DOMAIN = 8
+CONCURRENT_ITEMS = 500
+CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS_PER_DOMAIN = 32
 CONCURRENT_REQUESTS_PER_IP = 0
 
 # ---------------------------------------DELAY setting-----------------------------------
@@ -380,7 +380,7 @@ LOG_FORMATTER = "scrapy.logformatter.LogFormatter"
 LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
 LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 LOG_STDOUT = False
-LOG_LEVEL = "DEBUG"
+LOG_LEVEL = "INFO"
 LOG_FILE = None
 LOG_SHORT_NAMES = False
 

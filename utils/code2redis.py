@@ -30,7 +30,7 @@ def hashid2redis(crawler_name: str = "eastmoney", max_step: int = 10000, number_
             if index * step > show_count * 10000:
                 logger.info("成功插入: {0}/{1}".format(int((index + 1) / insert_count * hashid_count), hashid_count))
                 show_count += 1
-        logger.info("成功插入总数: {0}/{1}".format(int((index + 1) / insert_count * hashid_count), hashid_count))
+        logger.info("成功插入总数: {0}/{1}".format(hashid_count, hashid_count))
         logger.info("总用时: {0}".format(time.time() - start_time))
     else:
         logger.info("获取 HASHID 条数: {0}".format(hashid_count))
