@@ -23,8 +23,8 @@ class MongoDBPipeline(object):
         :param spider: spider相关信息
         :return item:
         """
-        if item.get("code"):
+        if item.get("_id"):
             self.db[str(spider.name).split("_")[0].lower()].update_one(
-                filter={"code": item["code"]}, update={"$set": dict(item)}, upsert=True
+                filter={"_id": item["_id"]}, update={"$set": dict(item)}, upsert=True
             )
         return item

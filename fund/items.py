@@ -3,7 +3,7 @@ import scrapy
 
 
 class EastmoneyFundItem(scrapy.Item):
-    code = scrapy.Field()  # 基金代码
+    _id = scrapy.Field()  # 基金代码
     initials = scrapy.Field()  # 中文首字母缩写
     name = scrapy.Field()  # 中文名称
     type = scrapy.Field()  # 类型
@@ -33,7 +33,6 @@ class EastmoneyFundItem(scrapy.Item):
     buy_sedemption = scrapy.Field()  # 申购赎回
     swith_same_type = scrapy.Field()  # 同类型基金涨幅榜
     million_copies_income = scrapy.Field()  # 基金收益走势图 每万份收益
-    seven_days_year_income = scrapy.Field()  # 基金收益走势图   7日年化收益率
+    seven_days_year_income = scrapy.Field()  # 基金收益走势图 7日年化收益率
     asset_allocation_currency = scrapy.Field()  # 资产配置
-    created_at = scrapy.Field()
-    updated_at = scrapy.Field()
+    updated_at = scrapy.Field()  # 更新时间

@@ -13,9 +13,9 @@ class EastmoneyInfoSpider(RedisSpider):
 
     def make_request_from_data(self, data):
         data = eval(data)
-        code = data.get("code")
-        fund_info_url = f"http://fund.eastmoney.com/pingzhongdata/{code}.js"
-        return scrapy.Request(url=fund_info_url, dont_filter=True, meta={"code": code}, callback=self.parse, )
+        code = data.get("_id")
+        url = f"http://fund.eastmoney.com/pingzhongdata/{code}.js"
+        return scrapy.Request(url=url, dont_filter=True, meta={"code": code}, callback=self.parse)
 
     def parse(self, response, **kwargs):
         code = response.meta.get("code")
@@ -49,7 +49,7 @@ class EastmoneyInfoSpider(RedisSpider):
             "seven_days_year_income": "Data_sevenDaysYearIncome",
             "asset_allocation_currency": "Data_assetAllocationCurrency",
         }
-        item = EastmoneyFundItem(code=code)
+        item = EastmoneyFundItem(_id=code)
         for key, name in date_map.items():
             try:
                 item[key] = js_content.eval(name)

@@ -15,8 +15,7 @@ redis_conn = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB, password
 def hashid2redis(crawler_name: str = "eastmoney", max_step: int = 10000, number_threads: int = 1):
     col = db[crawler_name]
     start_time = time.time()
-    hashid_list = [str(one) for one in col.find({}, {"_id": False, "code": True})]
-
+    hashid_list = [str(one) for one in col.find({}, {"_id": True})]
     hashid_count = len(hashid_list)
     if hashid_count:
         logger.info("获取 HASHID 条数: {0} 用时: {1}".format(hashid_count, time.time() - start_time))
